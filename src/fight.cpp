@@ -315,7 +315,7 @@ int Fight::turn()
 		Stat stat = getStatBuffObject(bot_object_chosen);
 		int old_buff_index = getOpponentPkmn()->getBuff(stat);
 		display.displayDialog(2000, getOpponent()->getName() + " utilise un" + display.femininObject(bot_object_chosen) + " "
-				+ display.objectName(bot_object_chosen) + " sur " + getOpponent()->getPkmn(bot_pkmn_index_chosen)->getName());
+				+ display.objectName(bot_object_chosen) + " sur " + getOpponentPkmn()->getName());
 		getOpponent()->useObject(bot_object_chosen, getOpponent()->getIndexActivePkmn());
 		// If buff object -> show effect
 		if(stat != NULL_STAT)

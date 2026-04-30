@@ -64,6 +64,7 @@ void Trainer_Tile::onInteract(sf::RenderWindow* window, sf::Font* font, Trainer*
 	{
 		// Start Fight
 		int idx = drawRandint(1, MAX_TRAINER_PRESET_ID);
+		if(idx == 6) idx++;
 		std::cout << "Random trainer id : " << idx << std::endl;
 		Trainer opponent = Trainer(db, idx);
 		Fight fight = Fight(window, font, player, &opponent);
