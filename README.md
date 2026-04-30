@@ -36,7 +36,7 @@ A creature-collecting RPG built in C++ using SFML and SQLite3. Explore a tile-ba
 
 ## Gameplay Video
 
-[![Watch the demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=WSYt9E28FJU)
+[![Watch the demo](https://img.youtube.com/vi/YOUR_VIDEO_ID/maxresdefault.jpg)](https://www.youtube.com/watch?v=SkMazuYRue4)
 
 ---
 
