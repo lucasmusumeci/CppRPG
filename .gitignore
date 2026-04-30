@@ -1,0 +1,30 @@
+# --- Build directories ---
+Debug/
+Release/
+build/
+out/
+
+# Fichiers objets et binaires
+*.o
+*.d
+*.a
+*.so
+*.exe
+*.sqbpro
+
+# Makefiles générés automatiquement
+**/makefile
+**/sources.mk
+**/subdir.mk
+
+# --- Autres ---
+.metadata/
+.project
+.cproject
+.settings/
+.idea
+CMakeLists.txt
+
+# Not including any copyrighted material
+assets/
+*.db
