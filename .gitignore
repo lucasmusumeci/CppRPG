@@ -26,5 +26,12 @@ out/
 CMakeLists.txt
 
 # Not including any copyrighted material
-assets/
+sounds/
+fonts/
+object_sprites/
+map_sprites/
+pkmn_sprites/
+battleground.png
+opponentBattleUIbox.png
+playerBattleUIbox.png
 *.db
