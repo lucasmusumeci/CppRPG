@@ -87,34 +87,79 @@ CppRPG/
 > **Note:** Most assets and the database are not included in the repository (see `.gitignore`). You must supply your own — see the [Assets](#assets) and [Database](#database) sections below.
 
 ---
-
 ## Dependencies
 
 - **SFML 2.6** — graphics, window, system modules
 - **SQLite3** — embedded database for creature/move/trainer data
 
-The project expects shared libraries (`.so`) to be present in a `lib/` directory at the project root, or installed system-wide.
+Both libraries are built locally into `lib/` and linked statically, so no system-wide installation is required. See [Building the Project](#building-the-project) below.
 
 ---
 
 ## Building the Project
 
-The project is set up for Eclipse CDT (or any Makefile-based build). Object files and binaries are output to `Debug/` or `Release/`.
-
-A typical manual build (adjust include/library paths as needed):
+### 1. Clone the repository
 
 ```bash
-g++ src/*.cpp \
-    -Iinc \
-    -Llib \
-    -lsfml-graphics -lsfml-window -lsfml-system -lsqlite3 \
-    -o CppRPG
+git clone 
+cd CppRPG
+mkdir -p lib/lib lib/include
 ```
 
-Run from the project root so that relative asset paths (`./assets/`, `./data/`) resolve correctly:
+### 2. Install system build dependencies
+
+These are display/input backends required by SFML at link time. They are part of any standard Linux desktop install.
 
 ```bash
-./CppRPG
+sudo apt install cmake libgl-dev libx11-dev libxrandr-dev libxcursor-dev \
+                 libudev-dev libfreetype-dev
+```
+
+### 3. Build SFML (static)
+
+```bash
+cd lib
+git clone --depth 1 --branch 2.6.2 https://github.com/SFML/SFML.git
+cmake -S SFML -B SFML/build \
+      -DBUILD_SHARED_LIBS=OFF \
+      -DCMAKE_BUILD_TYPE=Release \
+      -DCMAKE_INSTALL_PREFIX=$PWD \
+      -DSFML_INSTALL_PKGCONFIG_FILES=OFF \
+      -DSFML_BUILD_AUDIO=OFF \
+      -DSFML_BUILD_NETWORK=OFF
+cmake --build SFML/build --target install -j$(nproc)
+cd ..
+```
+
+This installs `libsfml-graphics-s.a`, `libsfml-window-s.a`, `libsfml-system-s.a` and the SFML headers into `lib/`.
+
+### 4. Build SQLite3
+
+```bash
+cd lib
+wget https://www.sqlite.org/2025/sqlite-amalgamation-3490100.zip
+unzip sqlite-amalgamation-3490100.zip
+cd sqlite-amalgamation-3490100
+gcc -O2 -c sqlite3.c -o sqlite3.o
+ar rcs ../lib/libsqlite3.a sqlite3.o
+cp sqlite3.h ../include/
+cd ../..
+```
+
+### 5. Build the game
+
+```bash
+make
+```
+
+The `lib/` directory is excluded from the repository (see `.gitignore`). Steps 3 and 4 only need to be done once per machine.
+
+### 6. Run
+
+Always run from the project root so that the relative asset and data paths resolve correctly:
+
+```bash
+./PkmnRPG
 ```
 
 ---
