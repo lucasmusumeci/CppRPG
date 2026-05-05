@@ -3,6 +3,7 @@ Debug/
 Release/
 build/
 out/
+lib/
 
 # Fichiers objets et binaires
 *.o
@@ -11,6 +12,7 @@ out/
 *.so
 *.exe
 *.sqbpro
+PkmnRPG
 
 # Makefiles générés automatiquement
 **/makefile
